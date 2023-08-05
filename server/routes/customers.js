@@ -5,7 +5,7 @@ const customerController = require('../controllers/customerController');
 
 router.get('/',customerController.homepage);
 router.get('/about',customerController.about);
-router.get('/add',customerController.addCustomer);
+router.get('/uploadgrades',customerController.addCustomer);
 //router.post('/add',customerController.postStudent);
 router.get('/view/:id', customerController.view);
 router.get('/edit/:id', customerController.edit);
@@ -21,5 +21,4 @@ router.get('/dropDown', customerController.dropDown);
 router.post('/dropDown', customerController.processDropDown);
 
 //router.get('/uploadgrades',customerController.uploadGrades);
-
 module.exports = router;
