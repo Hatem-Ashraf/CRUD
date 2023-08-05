@@ -1,0 +1,61 @@
+<!-- ... (rest of the page content) ... -->
+<form action="/dropDown" method="POST">
+  <!-- First dropdown for main department selection -->
+  <div class="form-group mb-4">
+    <label for="mainDepartment">Main Department</label>
+    <select class="form-control" id="mainDepartment" name="mainDepartment" required>
+      <option value="Electrical Engineering">Electrical Engineering</option>
+      <option value="Mechanical Engineering">Mechanical Engineering</option>
+      <!-- Add more options as needed -->
+    </select>
+  </div>
+
+  <!-- Second dropdown for secondary department selection -->
+  <div class="form-group mb-4">
+    <label for="secondaryDepartment">Secondary Department</label>
+    <select class="form-control" id="secondaryDepartment" name="secondaryDepartment" required>
+      <!-- Options will be populated dynamically based on the main department selection -->
+    </select>
+  </div>
+
+  <div class="form-group mb-4">
+    <button type="submit" class="btn btn-primary">Submit Department</button>
+  </div>
+</form>
+  <!-- Add the JavaScript code here -->
+  <script>
+
+    const mainDepartmentDropdown = document.getElementById('mainDepartment');
+    const secondaryDepartmentDropdown = document.getElementById('secondaryDepartment');
+  
+    // Define the options for the secondary departments for each main department
+    const secondaryDepartmentsByMainDepartment = {
+      'Electrical Engineering': ['Communication', 'Electrical Power', 'Computer'],
+      'Mechanical Engineering': ['Production', 'Power'],
+      // Add more main departments and corresponding secondary departments as needed
+    };
+  
+    // Function to update the secondary department dropdown based on the selected main department
+    function updateSecondaryDepartments() {
+      const mainDepartmentValue = mainDepartmentDropdown.value;
+      const secondaryDepartments = secondaryDepartmentsByMainDepartment[mainDepartmentValue];
+  
+      // Clear existing options
+      secondaryDepartmentDropdown.innerHTML = '';
+  
+      // Add new options
+      secondaryDepartments.forEach((secondaryDepartment) => {
+        const option = document.createElement('option');
+        option.value = secondaryDepartment;
+        option.textContent = secondaryDepartment;
+        secondaryDepartmentDropdown.appendChild(option);
+      });
+    }
+  
+    // Add event listener to update secondary departments when main department changes
+    mainDepartmentDropdown.addEventListener('change', updateSecondaryDepartments);
+  
+    // Initialize secondary department options on page load
+    updateSecondaryDepartments();
+  </script>
+  

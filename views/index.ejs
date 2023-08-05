@@ -1,0 +1,113 @@
+<div class="d-flex justify-content-between flex-wrap flex-md nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Dashboard</h1>
+    <div class="btn-toolbar mb-2 mb-md 0">
+      <div class="btn-group me-2">
+        <a href="/add" class="btn btn-sm btn-outline-secondary">+ New User</a>
+      </div>
+      <div class="btn-group me-2">
+        <a href="/addCourse" class="btn btn-sm btn-outline-secondary">+ New Course</a>
+      </div>
+      <div class="btn-group me-2">
+        <a href="/viewCourse" class="btn btn-sm btn-outline-secondary"> courses board</a>
+      </div>
+      <div class="btn-group me-2">
+        <a href="/dropDown" class="btn btn-sm btn-outline-secondary">dropdown</a>
+      </div>
+    </div>
+  </div>
+
+<!--flash message using bootstrab-->
+<% messages.forEach(element => { %>
+ 
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <%= element %>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  
+<% }) %>
+
+<div class="table-responsive">
+
+  <table class="table table-striped table-sm">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Department</th>
+        <th scope="col">sub-Department</th>
+
+
+        <th scope="col" class="text-end">Action</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% students.forEach(element => { %>
+        <tr class="align-middle">
+          <td><%= element.name %></td>
+          <td><%= element.department%></td>
+          <td><%= element.subDepartment%></td>
+
+          <td class="text-end">
+
+            <div class="d-flex flex-row justify-content-end gap-2">
+
+              <a href="/view/<%= element._id %>" type="button" class="btn btn-primary btn-small">
+                <i class="bi bi-eye"></i>
+              </a>
+
+              <a href="/update/<%= element._id %>" type="button" class="btn btn-warning btn-small">
+                <i class="bi bi-pencil"></i>
+              </a>
+
+              <form action="/edit/<%= element._id %>?_method=DELETE" method="POST" class="position-relative">
+                <button type="submit" class="btn btn-danger btn-small">
+                  <i class="bi bi-person-x"></i>
+                </button>
+              </form>
+
+            </div>
+
+
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+
+<!--move between multiple pages-->
+<% if (students.length > 0) { %>
+  <nav aria-label="Dashboard Pagination">
+    <ul class="pagination justify-content-center mt-5">
+
+      <% if (current == 1) { %>
+        <li class="page-item disabled"><a href="#" class="page-link">First</a></li>
+      <% } else { %>
+        <li class="page-item"><a href="/?page=1" class="page-link">First</a></li>
+      <% } %>
+
+      <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
+      <% if(i !== 1) { %>
+        <li class="page-item disabled"><a href="#" class="page-link">...</a></li>
+      <% } %>
+
+      <% for(; i <= (Number(current) + 4) && i <= pages; i++ ) { %>
+        <% if (i == current) { %>
+          <li class="page-item disabled"><a href="#" class="page-link"><%= i %></a></li>
+        <% } else { %>
+          <li class="page-item"><a href="/?page=<%= i %>" class="page-link"><%= i %></a></li>
+        <% } %>
+        <% if (i == Number(current) + 4 && i < pages) { %>
+          <li class="page-item disabled"><a href="#" class="page-link">...</a></li>
+        <% } %>
+      <% } %>
+
+      <% if (current == pages) { %>
+        <li class="page-item disabled"><a href="#" class="page-link">Last</a></li>
+      <% } else { %>
+        <li class="page-item"><a href="/?page=<%= pages %>" class="page-link">Last</a></li>
+      <% } %>
+
+    </ul>
+  </nav>
+<% } %>

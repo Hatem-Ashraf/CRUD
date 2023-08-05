@@ -1,0 +1,91 @@
+<div class="d-flex justify-content-between flex-wrap flex-md nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Editing Course</h1>
+</div>
+
+<div class="col py-3">
+    <div class="row">
+        <div class="col">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+                    <li class="breadcrumb-item active">Editing Course</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<form action="/editCourse/<%= courseId %>/?_method=PUT" method="POST">
+    <div class="form-group mb-4">
+        <label for="name">Course Name</label>
+        <input type="text" class="form-control" id="name" name="name" value="<%= course.name %>" placeholder="Course Name" required>
+    </div>
+
+    <div class="row form-group mb-4">
+        <div class="col">
+            <label for="course_hours">Course Hours</label>
+            <input type="number" class="form-control" id="course_hours" name="course_hours" value="<%= course.course_hours %>" placeholder="Course Hours" required>
+        </div>
+
+        <div class="col">
+            <label for="year_works">Year Works</label>
+            <input type="number" class="form-control" id="year_works" name="year_works" value="<%= course.year_works %>" placeholder="Year Works" required>
+        </div>
+    </div>
+
+    <div class="row form-group mb-4">
+        <div class="col">
+            <label for="oral_p">Oral Percentage</label>
+            <input type="number" class="form-control" id="oral_p" name="oral_p" value="<%= course.oral_p %>" placeholder="Oral Percentage" required>
+        </div>
+
+        <div class="col">
+            <label for="written">Written Percentage</label>
+            <input type="number" class="form-control" id="written" name="written" value="<%= course.written %>" placeholder="Written Percentage" required>
+        </div>
+    </div>
+
+    <div class="form-group mb-4">
+        <label for="exam_hours">Exam Hours</label>
+        <input type="number" class="form-control" id="exam_hours" name="exam_hours" value="<%= course.exam_hours %>" placeholder="Exam Hours">
+    </div>
+
+    <div class="form-group mb-4">
+        <label for="department">Department</label>
+        <input type="text" class="form-control" id="department" name="department" value="<%= course.department %>" placeholder="Department" required>
+    </div>
+
+    <div class="form-group mb-4">
+        <label for="subDepartment">Sub-Department</label>
+        <input type="text" class="form-control" id="subDepartment" name="subDepartment" value="<%= course.subDepartment %>" placeholder="Sub-Department" required>
+    </div>
+
+    <div class="form-group mb-4">
+        <button type="submit" class="btn btn-primary">Update Course</button>
+
+        <button type="button" class="btn btn-danger" data-bs-toggle="modal" id="deleteButton" data-bs-target="#deleteModal">Delete Course</button>
+    </div>
+</form>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="deleteModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">You are about to remove a course record.</div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    This will remove the course record of <b class="fw-bold"><%= course.name %></b><br>
+                    Are you sure?
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <form action="/editCourse/<%= courseId %>/?_method=DELETE" method="POST" class="position-relative">
+                    <button type="submit" class="btn btn-primary">Yes, Remove Course</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

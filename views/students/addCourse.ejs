@@ -1,0 +1,100 @@
+<div class="d-flex justify-content-between flex-wrap flex-md nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <div class="d-flex">
+    <!-- Empty div to push the heading to the right -->
+  </div>
+  <div class="text-end">
+    <h1 class="h2">إضافة مقرر جديد</h1>
+  </div>
+</div>
+
+<div class="col py-3">
+  <div class="row">
+    <div class="col">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/">لوحة التحكم</a></li>
+          <li class="breadcrumb-item active">إضافة مقرر</li>
+        </ol>
+      </nav>
+    </div>
+    <div class="col text-end fw-lighter">
+      <!-- Display any relevant content here, if needed -->
+    </div>
+  </div>
+</div>
+
+<form action="/addCourse" method="POST" dir="rtl">
+  <div class="form-group mb-4">
+    <label for="name">اسم المقرر</label>
+    <input type="text" class="form-control" id="name" name="name" value="" placeholder="اسم المقرر" required>
+  </div>
+
+  <div class="row form-group mb-4">
+    <div class="col">
+      <label for="course_hours">عدد الساعات المعتمدة</label>
+      <input type="number" class="form-control" id="course_hours" name="course_hours" value="" placeholder="عدد الساعات المعتمدة" required>
+    </div>
+
+    <div class="col">
+      <label for="year_works">أعمال السنة</label>
+      <input type="number" class="form-control" id="year_works" name="year_works" value="" placeholder="أعمال السنة" required>
+    </div>
+  </div>
+
+  <div class="row form-group mb-4">
+    <div class="col">
+      <label for="oral_p">شفوي/عملي</label>
+      <input type="number" class="form-control" id="oral_p" name="oral_p" value="" placeholder="شفوي/عملي" required>
+    </div>
+
+    <div class="col">
+      <label for="written">تحريري</label>
+      <input type="number" class="form-control" id="written" name="written" value="" placeholder="تحريري" required>
+    </div>
+  </div>
+
+  <div class="form-group mb-4">
+    <label for="exam_hours">ساعات الامتحان</label>
+    <input type="number" class="form-control" id="exam_hours" name="exam_hours" value="" placeholder="ساعات الامتحان">
+  </div>
+
+<!-- ... (previous HTML code) ... -->
+
+
+<!-- ... (previous HTML code) ... -->
+
+<div class="form-group mb-4">
+  <label for="department">القسم</label>
+  <select class="form-control" id="department" name="department" required>
+    <% for (const department of departments) { %>
+      <option value="<%= department %>"><%= department %></option>
+    <% } %>
+  </select>
+</div>
+
+<div class="form-group mb-4">
+  <label for="subDepartment">الشعبة الفرعية</label>
+  <select class="form-control" id="subDepartment" name="subDepartment" required>
+    <option value="" disabled selected>اختر الشعبة الفرعية</option>
+    <!-- Loop through the keys of subDepartments (main departments) and populate the options -->
+    <% for (const mainDepartment of Object.keys(subDepartments)) { %>
+      <optgroup label="<%= mainDepartment %>">
+        <% const subDeps = subDepartments[mainDepartment]; %>
+        <!-- Loop through the sub-departments array and populate the options -->
+        <% for (const subDepartment of subDeps) { %>
+          <option value="<%= subDepartment %>"><%= subDepartment %></option>
+        <% } %>
+      </optgroup>
+    <% } %>
+  </select>
+</div>
+<div class="form-group mb-4">
+  <button type="submit" class="btn btn-primary">إضافة المقرر</button>
+</div>
+
+</form>
+
+
+
+
+
