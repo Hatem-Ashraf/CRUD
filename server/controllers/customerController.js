@@ -103,6 +103,42 @@ exports.about = async (req, res) => {
 };
 
 
+// exports.viewMarks = async (req, res) => {
+//   const local = {
+//     title: "view marks page",
+//   };
+//   try {
+//     res.render('students/viewMarks', { local});
+//   } catch (error) {
+//     console.log(error);
+//   }
+
+// };
+
+// Controller function to handle fetching students based on selected department and sub-department
+exports.getStudentsMarks = async (req, res) => {
+  try {
+    // Retrieve the selected main and secondary departments from the session (after processing the cascading dropdown selection)
+    // Retrieve the selected main and secondary departments from the session
+    const mainDepartment = req.session.mainDepartment;
+    const secondaryDepartment = req.session.secondaryDepartment;
+
+    // Modify the database query to filter students based on the selected department and sub-department
+    const students = await stuControl.aggregate([
+      { $match: { department: mainDepartment, subDepartment: secondaryDepartment } },
+    ]).exec();
+
+    const count = await stuControl.countDocuments({
+      department: mainDepartment,
+      subDepartment: secondaryDepartment,
+    });
+
+    res.render('students/viewMarks', { students});
+  } catch (err) {
+    console.error('Error fetching data:', err);
+    res.status(500).send('Internal Server Error');
+  }
+};
 
 /*
 exports.uploadGrades  = async (req,res)=>{
