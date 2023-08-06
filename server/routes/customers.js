@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 const customerController = require('../controllers/customerController');
 
-router.get('/',customerController.homepage);
+router.get('/dash',customerController.homepage);
 router.get('/about',customerController.about);
 router.get('/add',customerController.addCustomer);
 //router.post('/add',customerController.postStudent);

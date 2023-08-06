@@ -9,6 +9,20 @@ const app = express();
 const port = process.env.PORT || 3000;
 const courseRoutes = require('./server/routes/courses.js');
 const stuContRouter = require('./server/routes/studentControl.js'); 
+
+//--------
+const cors = require('cors')
+const cookieParser = require('cookie-parser')
+const mongoose = require('mongoose')
+const verifyJWT = require('./server/middleware/verifyJWT')
+const path = require('path')
+
+
+// app.use(logger)
+
+
+app.use(cookieParser())
+
 // Connect to the database
 connectDB();
 
@@ -45,6 +59,40 @@ app.use('/', require('./server/routes/customers'));
 
 app.use('/', courseRoutes);
 app.use('/', stuContRouter);
+
+// ------------ some routes for login -------------
+app.get('/', (req, res) => {
+  res.render('base1', { title: "login system" })
+})
+app.get('/control', (req, res) => {
+  res.render('control', { title: "login system" })
+})
+app.get('/personnel', (req, res) => {
+  res.render('personnel', { title: "login system" })
+})
+app.get('/student', (req, res) => {
+  res.render('student', { title: "login system" })
+})
+
+
+//user's auth route
+app.use('/auth', require("./server/routes/login/auth"))
+
+
+//--routes need permissions
+app.use(verifyJWT)
+//dashboards
+app.use('/usersdash', require("./server/routes/login/usersDash"))
+
+//logout route
+app.use('/logout', require("./server/routes/login/logout"))
+
+
+
+//route for the student homepage
+app.use('/onestudent', require('./server/routes/login/oneStudent'))
+
+// ---------------- end of routes for login -------------------------
 
 
 // Handle 404 error page not found 
