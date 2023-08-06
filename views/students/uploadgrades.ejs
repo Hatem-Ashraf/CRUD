@@ -80,7 +80,7 @@
           selectElement.innerHTML = '';
           data.courses.forEach((course) => {
             const option = document.createElement('option');
-            option.value = course._id;
+            option.value = course.name;
             option.textContent = course.name;
             selectElement.appendChild(option);
           });
