@@ -1,5 +1,4 @@
 const Student = require('../models/Student');
-
 const Course = require('../models/Course');
 const stuControl = require('../models/studentsControl');
 
@@ -39,26 +38,6 @@ exports.homepage = async (req, res) => {
     res.status(500).send('Internal Server Error');
   }
 };
-
-
-
-// exports.update = async (req, res) => {
-//   try {
-//     const student = await stuControl.findOne({ _id: req.params.id });
-//     if (!student) {
-//       console.log('Student not found'); // Add this line to check if student is null
-//       // Handle the case when student is null (e.g., render an error page)
-//     } else {
-//       const local = {
-//         title: 'update Student Data',
-//       };
-//       res.render('students/update', { local, student });
-//     }
-//   } catch (error) {
-//     console.log(error); // Output the error for debugging purposes
-//   }
-
-// };
 
 
 
@@ -133,8 +112,18 @@ exports.uploadGrades  = async (req,res)=>{
 //add new user
 
 exports.addCustomer = async (req, res) => {
+  const departments = ['Electrical Engineering', 'Mechanical Engineering', 'Civil Engineering', 'Architecture', 'Surveying Engineering']; // Replace with your actual department list
+  const subDepartments = {
+    'Electrical Engineering': ['Electrical Power', 'Computer', 'Electronic and Communications'],
+    'Mechanical Engineering': ['Mechanical Power', 'Production', 'Mechatronics'],
+    'Civil Engineering': ['Structures', 'General Civil'],
+    'Architecture': ['Architecture'],
+    'Surveying Engineering': ['Surveying Engineering'],
+  };
   const local = {
     title: "student-page",
+    departments,
+    subDepartments,
   };
   res.render('students/uploadgrades', local);
 };
@@ -258,11 +247,14 @@ exports.processDropDown = async (req, res) => {
 
   try {
     // Assuming you have departments and sub-departments lists defined in your code
-    const departments = ['Electrical Engineering', 'Mechanical Engineering']; // Replace with your actual department list
+    const departments = ['Electrical Engineering', 'Mechanical Engineering','Civil Engineering','Architecture','Surveying Engineering']; // Replace with your actual department list
     const subDepartments = {
-      'Electrical Engineering': ['Communication', 'Electrical Power', 'Computer'],
-      'Mechanical Engineering': ['Production', 'Power'],
-    }; // Replace with your actual sub-department list
+      'Electrical Engineering': ['Electrical Power', 'Computer','Electronic and Communications'],
+      'Mechanical Engineering': ['Mechanical Power', 'Production','Mechatronics'],
+      'Civil Engineering' :['Structures','General Civil'],
+      'Architecture':['Architecture'],
+      'Surveying Engineering':['Surveying Engineering'],
+    }; 
 
     // Fetch the courses related to the selected main and secondary departments
     const courses = await Course.find({
