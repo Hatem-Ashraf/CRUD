@@ -8,7 +8,7 @@ router.get('/viewgrads',customerController.viewMarks);
 
 
 
-router.get('/dash',customerController.homepage);
+router.get('/views/index',customerController.homepage);
 
 router.get('/viewgrads',customerController.viewMarks);
 
@@ -20,7 +20,8 @@ router.get('/uploadgrades',customerController.addCustomer);
 router.get('/uploadgrades/:id',customerController.updateCustomer);
 
 //router.post('/add',customerController.postStudent);
-router.get('/view/:id', customerController.view);
+router.get('/viewStudent/:id', customerController.viewStudent);
+
 router.get('/edit/:id', customerController.edit);
 router.put('/update/:id', customerController.update);
 
