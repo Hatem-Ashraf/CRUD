@@ -58,41 +58,57 @@
             value="<%=course.c_hours%>" >
         </div>
 
+    <div class="row">
+      <div class="col-md-6">
         <div class="form-group my-4">
           <label for="name">year_works:</label>
           <input type="number" class="form-control" id="courses<%= i%>.year_works" name="courses<%= i%>.year_works"
             required value="<%=course.year_works%>" >
         </div>
-
+        </div>
+      <div class="col-md-6">
         <div class="form-group my-4">
           <label for="name">reExam_year_works:</label>
           <input type="number" class="form-control" id="courses<%= i%>.reExam_year_works"
             name="courses<%= i%>.reExam_year_works" required value="<%=course.reExam_year_works%>" >
         </div>
+        </div>
+    </div>
 
+    <div class="row">
+      <div class="col-md-6">
         <div class="form-group my-4">
           <label for="name">oral_p:</label>
           <input type="number" class="form-control" id="courses<%= i%>.oral_p" name="courses<%= i%>.oral_p" required
-            value="<%=course.oral_p%>"
-          >
+            value="<%=course.oral_p%>">
+        </div>
         </div>
 
+        <div class="col-md-6">
         <div class="form-group my-4">
           <label for="name">reExam_oral_p:</label>
           <input type="number" class="form-control" id="courses<%= i%>.reExam_oral_p"
             name="courses<%= i%>.reExam_oral_p" required value="<%=course.reExam_oral_p%>" >
         </div>
+        </div>
+</div>
 
+<div class="row">
+  <div class="col-md-6">
         <div class="form-group my-4">
           <label for="name">written:</label>
           <input type="number" class="form-control" id="courses<%= i%>.written" name="courses<%= i%>.written" required
             value="<%=course.written%>" >
         </div>
+</div>
 
+<div class="col-md-6">
         <div class="form-group my-4">
           <label for="name">reExam_written:</label>
           <input type="number" class="form-control" id="courses<%= i%>.reExam_written"
             name="courses<%= i%>.reExam_written" required value="<%=course.reExam_written%>" >
+        </div>
+        </div>
         </div>
         <div class="form-group my-4">
           <label for="name">course_total_degree:</label>
@@ -106,6 +122,8 @@
           <div class="form-group my-4">
             <input type="number" id="courseCount" value="<%=i-1%>" disabled>
           </div>
+
+         
 
           <div class="form-group my-4">
             <div class="d-grid gap-2">
