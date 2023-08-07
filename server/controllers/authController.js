@@ -182,7 +182,7 @@ const controlLogin = async (req, res) => {
             //this accesstoken is sent to the front end and he sould store it somewhere in memory not in local storage or as cookie
             
             console.log(`access token : \n ${accessToken}`)
-            res.redirect(`/usersdash/control`)
+            res.redirect('/dropDown')
     
         } else {
             return res.status(401).send("incorrect password or username") //unauthorized

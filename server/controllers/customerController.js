@@ -1,5 +1,7 @@
 const Student = require('../models/Student');
 const Course = require('../models/Course');
+const User = require('../models/User');
+
 const stuControl = require('../models/studentsControl');
 
 const mongoose = require('mongoose');
@@ -204,9 +206,9 @@ exports.addCustomer = async (req, res) => {
 };
 
 
-exports.view = async (req, res) => {
+exports.viewStudent = async (req, res) => {
   try {
-    const student = await Student.findOne({ _id: req.params.id });
+    const student = await stuControl.findOne({ _id: req.params.id });
     if (!student) {
       console.log('Student not found'); // Add this line to check if student is null
       // Handle the case when student is null (e.g., render an error page)
@@ -214,7 +216,7 @@ exports.view = async (req, res) => {
       const local = {
         title: 'view Student Data',
       };
-      res.render('students/view', { local, student });
+      res.render('students/viewStudent', { local, student });
     }
   } catch (error) {
     console.log(error); // Output the error for debugging purposes
@@ -496,7 +498,8 @@ exports.processDropDown = async (req, res) => {
     });
 
     // Redirect to the courses dashboard with the filtered courses
-    return res.render('students/viewCourse', { courses, departments, subDepartments });
+   // return res.render('/homepage', { courses, departments, subDepartments });
+   exports.homepage(req, res);
   } catch (error) {
     console.log(error);
     return res.status(500).send('Internal Server Error');

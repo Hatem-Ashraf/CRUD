@@ -1,7 +1,17 @@
+
+<style>
+
+.hide-header .header {
+  display: none;
+}
+
+  
+</style>
 <!-- ... (rest of the page content) ... -->
 <form action="/dropDown" method="POST">
   <!-- First dropdown for main department selection -->
   <div class="form-group mb-4">
+    <br>
     <label for="mainDepartment">Main Department</label>
     <select class="form-control" id="mainDepartment" name="mainDepartment" required>
       <option value="Electrical Engineering">Electrical Engineering</option>
@@ -66,4 +76,11 @@
     // Initialize secondary department options on page load
     updateSecondaryDepartments();
   </script>
-  
+
+   <script>
+    const searchForm = document.getElementById('searchForm');
+    if (searchForm) {
+      searchForm.style.display = 'none';
+    }
+  </script>
+ 
