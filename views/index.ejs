@@ -2,18 +2,22 @@
     <h1 class="h2">Dashboard</h1>
     <div class="btn-toolbar mb-2 mb-md 0">
       <div class="btn-group me-2">
-        <a href="/add" class="btn btn-sm btn-outline-secondary">+ New User</a>
+        <a href="/uploadgrades" class="btn btn-sm btn-outline-secondary">+ New User</a>
       </div>
       <div class="btn-group me-2">
         <a href="/addCourse" class="btn btn-sm btn-outline-secondary">+ New Course</a>
       </div>
       <div class="btn-group me-2">
-        <a href="/viewCourse" class="btn btn-sm btn-outline-secondary"> courses board</a>
+        <a href="/viewCourse" class="btn btn-sm btn-outline-secondary">courses board</a>
       </div>
       <div class="btn-group me-2">
         <a href="/dropDown" class="btn btn-sm btn-outline-secondary">dropdown</a>
       </div>
+      <div class="btn-group me-2">
+        <a href="/viewMarks" class="btn btn-sm btn-outline-secondary">view Marks</a>
+      </div>
     </div>
+    
   </div>
 
 <!--flash message using bootstrab-->
@@ -50,12 +54,11 @@
           <td class="text-end">
 
             <div class="d-flex flex-row justify-content-end gap-2">
-
               <a href="/view/<%= element._id %>" type="button" class="btn btn-primary btn-small">
                 <i class="bi bi-eye"></i>
               </a>
 
-              <a href="/update/<%= element._id %>" type="button" class="btn btn-warning btn-small">
+              <a href="/uploadgrades/<%= element._id %>" type="button" class="btn btn-warning btn-small">
                 <i class="bi bi-pencil"></i>
               </a>
 

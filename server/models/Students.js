@@ -19,4 +19,4 @@ const StuSchema = new mongoose.Schema({
     next_study: String,
 })
 
-module.exports = mongoose.model("Student", StuSchema)
+module.exports = mongoose.model("Students", StuSchema)
