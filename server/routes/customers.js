@@ -5,6 +5,9 @@ const customerController = require('../controllers/customerController');
 
 router.get('/',customerController.homepage);
 router.get('/about',customerController.about);
+
+router.get('/viewMarks', customerController.getStudentsMarks);
+
 router.get('/uploadgrades',customerController.addCustomer);
 router.get('/uploadgrades/:id',customerController.updateCustomer);
 
