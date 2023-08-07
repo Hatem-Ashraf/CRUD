@@ -382,10 +382,12 @@ exports.update = async (req, res) => {
     const result = await student.save();
     console.log(`result:${result}`)
     console.log("student updated successfully")
-    
-    // res.redirect(`/students/${student._id}`)
 
-    res.status(200)
+    // res.redirect(`/students/${student._id}`)
+   
+    //send status code 200 "ok" to the client side
+    req.flash('info', 'Student updated successfully'); // Set flash message using req.flash()
+    res.status(200).json(result)
 
   } catch (error) {
     console.error(error);

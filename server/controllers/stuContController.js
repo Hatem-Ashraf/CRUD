@@ -108,7 +108,7 @@ const createNewStudent = async (req, res) => {
     const result = await newStudent.save();
     console.log("Student created successfully");
     req.flash('info', 'New student added'); // Set flash message using req.flash()
-    res.redirect('/');
+    res.redirect('/dash');
 
   } catch (error) {
     console.error(error);

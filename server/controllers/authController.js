@@ -208,6 +208,7 @@ const handleLogout =  async (req, res) => {
     if (!foundUser){
         //if there's no user has this refresh token so delete the cookie
         res.clearCookie('jwt', {httpOnly: true, sameSite: "None"})
+        console.log("Cookie deleted successfully")
         return res.redirect("/")
     } 
     //if there's user has this refresh token then delete the refresh token and the cookie
@@ -216,8 +217,11 @@ const handleLogout =  async (req, res) => {
     console.log(result)
 
     res.clearCookie('jwt', {httpOnly: true, sameSite: "None"})
+    console.log("Cookie deleted successfully")
     res.redirect("/")
 }
+//----------------------------------------------
+
 
 module.exports = { 
     studentLogin,
