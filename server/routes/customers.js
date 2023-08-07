@@ -8,7 +8,7 @@ router.get('/viewgrads',customerController.viewMarks);
 
 
 
-router.get('/dash',customerController.homepage);
+router.get('/views/index',customerController.homepage);
 
 router.get('/viewgrads',customerController.viewMarks);
 

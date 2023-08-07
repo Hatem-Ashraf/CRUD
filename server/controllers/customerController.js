@@ -496,7 +496,8 @@ exports.processDropDown = async (req, res) => {
     });
 
     // Redirect to the courses dashboard with the filtered courses
-    return res.render('students/viewCourse', { courses, departments, subDepartments });
+   // return res.render('/homepage', { courses, departments, subDepartments });
+   exports.homepage(req, res);
   } catch (error) {
     console.log(error);
     return res.status(500).send('Internal Server Error');
