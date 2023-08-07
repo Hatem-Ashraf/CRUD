@@ -4,6 +4,10 @@ const router = express.Router();
 const customerController = require('../controllers/customerController');
 
 
+router.get('/viewgrads',customerController.viewMarks);
+
+
+
 router.get('/dash',customerController.homepage);
 
 router.get('/viewgrads',customerController.viewMarks);
