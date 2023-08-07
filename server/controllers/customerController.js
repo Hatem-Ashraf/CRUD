@@ -40,6 +40,45 @@ exports.homepage = async (req, res) => {
 };
 
 
+exports.viewMarks = async (req, res) => {
+  const messages = req.flash('info'); // Retrieve flash messages using req.flash()
+  const local = {
+    title: "grades",
+  };
+
+  let perPage = 12;
+  let page = req.query.page || 1;
+
+  try {
+    // Retrieve the selected main and secondary departments from the session
+    const mainDepartment = req.session.mainDepartment;
+    const secondaryDepartment = req.session.secondaryDepartment;
+
+    // Modify the database query to filter students based on the selected department and sub-department
+    const students = await stuControl.aggregate([
+      { $match: { department: mainDepartment, subDepartment: secondaryDepartment } },
+      { $sort: { updatedAt: -1 } },
+      { $skip: perPage * page - perPage },
+      { $limit: perPage },
+    ]).exec();
+
+    const count = await stuControl.countDocuments({
+      department: mainDepartment,
+      subDepartment: secondaryDepartment,
+    });
+    let maxNumCourses = 0;
+students.forEach((student) => {
+  if (student.courses.length > maxNumCourses) {
+    maxNumCourses = student.courses.length;
+  }})
+    res.render('students/viewGrades', { local, students, current: page, pages: Math.ceil(count / perPage), messages,maxNumCourses });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send('Internal Server Error');
+  }
+};
+
+
 
 
 
