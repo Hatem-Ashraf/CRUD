@@ -6,6 +6,11 @@
     <select class="form-control" id="mainDepartment" name="mainDepartment" required>
       <option value="Electrical Engineering">Electrical Engineering</option>
       <option value="Mechanical Engineering">Mechanical Engineering</option>
+
+      <option value="Civil Engineering">Civil Engineering</option>
+      <option value="Architecture">Architecture</option>
+      <option value="Surveying Engineering">Surveying Engineering</option>
+
       <!-- Add more options as needed -->
     </select>
   </div>
@@ -30,8 +35,11 @@
   
     // Define the options for the secondary departments for each main department
     const secondaryDepartmentsByMainDepartment = {
-      'Electrical Engineering': ['Communication', 'Electrical Power', 'Computer'],
-      'Mechanical Engineering': ['Production', 'Power'],
+      'Electrical Engineering': ['Electrical Power', 'Computer','Electronic and Communications'],
+      'Mechanical Engineering': ['Mechanical Power', 'Production','Mechatronics'],
+      'Civil Engineering' :['Structures','General Civil'],
+      'Architecture':['Architecture'],
+      'Surveying Engineering':['Surveying Engineering'],
       // Add more main departments and corresponding secondary departments as needed
     };
   
