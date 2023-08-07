@@ -1,0 +1,105 @@
+<div class="d-flex justify-content-between flex-wrap flex-md nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2"><%= student.firstName  %> <%= student.lastName  %></h1>
+    <div class="btn-toolbar mb-2 mb-md 0">
+      <div class="btn-group me-2">
+        <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
+        <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+      </div>
+    </div>
+  </div>
+  
+  <div class="col py-3">
+  
+    <div class="row">
+      <div class="col">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+            <li class="breadcrumb-item active"><%= student.name %></li>
+          </ol>
+        </nav>
+      </div>
+      <div class="col text-end fw-lighter">
+        <b>Last Updated <%= new Date(student.updatedAt).toUTCString() %> </b>
+        <b>UserId:</b> <%= student._id %>
+      </div>
+    </div>
+  
+  </div>
+  
+  <ul class="list-group">
+  
+    <li class="list-group-item"> 
+      <div class="row">
+        <div class="col" style="max-width: 140px"> <b>Name:</b></div>
+        <div class="col"><%= student.name%></div>
+      </div>
+    </li>  
+   <li class="list-group-item"> 
+    <div class="row">
+      <div class="col" style="max-width: 140px"> <b>Department:</b></div>
+      <div class="col"><%= student.department %></div>
+    </div>
+  </li>
+  <li class="list-group-item"> 
+    <div class="row">
+      <div class="col" style="max-width: 140px"> <b>subDepartment:</b></div>
+      <div class="col"><%= student.subDepartment %></div>
+    </div>
+  </li>
+  <li class="list-group-item"> 
+    <div class="row">
+      <div class="col" style="max-width: 140px"> <b>Type OF Study:</b></div>
+      <div class="col"><%= student.type %></div>
+    </div>
+  </li>
+
+  <li class="list-group-item"> 
+    <div class="row">
+      <div class="col" style="max-width: 140px"> <b>Netx study:</b></div>
+      <div class="col"><%= student.next_study %></div>
+    </div>
+  </li>
+
+  <li class="list-group-item"> 
+    <div class="row">
+      <div class="col" style="max-width: 140px"> <b>Final GPA:</b></div>
+      <div class="col"><%= student.GPA_final %></div>
+    </div>
+  </li>
+
+  <li class="list-group-item">
+    <div class="row">
+      <div class="col" style="max-width: 140px"><b> Courses:</b></div>
+      <div class="col">
+        <% if (student.courses && student.courses.length > 0) { %>
+          <% for (let i = 0; i < student.courses.length; i++) { %>
+            <%= student.courses[i].name %>
+            <% if (i !== student.courses.length - 1) { %>
+              , <!-- Add comma after each course except for the last one -->
+            <% } %>
+          <% } %>
+        <% } else { %>
+          No courses available <!-- Display this message if there are no courses -->
+        <% } %>
+      </div>
+    </div>
+  </li>
+  
+  
+  
+    <li class="list-group-item"> 
+      <div class="row">
+        <div class="col" style="max-width: 140px"> <b>Date Created:</b></div>
+        <div class="col"><%= student.createdAt %></div>
+      </div>
+    </li>
+  
+    <li class="list-group-item"> 
+      <div class="row">
+        <div class="col" style="max-width: 140px"> <b>Date Modified:</b></div>
+        <div class="col"><%= student.updatedAt %></div>
+      </div>
+    </li>
+  
+  </ul>
