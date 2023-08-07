@@ -3,9 +3,15 @@ const express = require('express');
 const router = express.Router();
 const customerController = require('../controllers/customerController');
 
+
 router.get('/viewgrads',customerController.viewMarks);
 
+
+
 router.get('/dash',customerController.homepage);
+
+router.get('/viewgrads',customerController.viewMarks);
+
 router.get('/about',customerController.about);
 
 router.get('/viewMarks', customerController.getStudentsMarks);
