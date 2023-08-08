@@ -11,4 +11,6 @@ router.route('/editor')
 router.route('/control')
     .get(verifyRoles(ROLES_LIST.Admin), authController.controlDashboard)
 
+
+
 module.exports = router

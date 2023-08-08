@@ -1,3 +1,4 @@
+
 <div class="d-flex justify-content-between flex-wrap flex-md nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <h1 class="h2">Dashboard</h1>
     <div class="btn-toolbar mb-2 mb-md 0">
@@ -13,9 +14,9 @@
       <div class="btn-group me-2">
         <a href="/dropDown" class="btn btn-sm btn-outline-secondary">dropdown</a>
       </div>
-      <div class="btn-group me-2">
-        <a href="/viewMarks" class="btn btn-sm btn-outline-secondary">view Marks</a>
-      </div>
+    <div class="btn-group me-2">
+    <a href="/viewMarks" class="btn btn-sm btn-outline-secondary">View Marks</a>
+     </div>
       <form action="/logout" method="get">
         <button class="btn btn-danger btn-sm" type="submit">Logout <i class="bi bi-lock-fill"></i></button>
       </form>
@@ -60,17 +61,19 @@
               <a href="/viewStudent/<%= element._id %>" type="button" class="btn btn-primary btn-small">
                 <i class="bi bi-eye"></i>
               </a>
-
+              <% if (local.userRoles.includes(local.ROLES_LIST.Admin)) { %>
               <a href="/uploadgrades/<%= element._id %>" type="button" class="btn btn-warning btn-small">
                 <i class="bi bi-pencil"></i>
               </a>
-
-              <form action="/edit/<%= element._id %>?_method=DELETE" method="POST" class="position-relative">
-                <button type="submit" class="btn btn-danger btn-small">
-                  <i class="bi bi-person-x"></i>
-                </button>
-              </form>
-
+              <% } %>
+              <% if (local.userRoles.includes(local.ROLES_LIST.Admin)) { %>
+                <form action="/students/delete/<%= element._id %>?_method=DELETE" method="POST" class="position-relative">
+                  <input type="hidden" name="_method" value="DELETE"> <!-- Use _method to simulate DELETE HTTP method -->
+                  <button type="submit" class="btn btn-danger btn-small">
+                    <i class="bi bi-person-x"></i>
+                  </button>
+                </form>    
+             <% } %>
             </div>
 
 
@@ -89,7 +92,7 @@
       <% if (current == 1) { %>
         <li class="page-item disabled"><a href="#" class="page-link">First</a></li>
       <% } else { %>
-        <li class="page-item"><a href="/?page=1" class="page-link">First</a></li>
+        <li class="page-item"><a href="/views/index?page=1" class="page-link">First</a></li>
       <% } %>
 
       <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
@@ -101,7 +104,7 @@
         <% if (i == current) { %>
           <li class="page-item disabled"><a href="#" class="page-link"><%= i %></a></li>
         <% } else { %>
-          <li class="page-item"><a href="/?page=<%= i %>" class="page-link"><%= i %></a></li>
+          <li class="page-item"><a href="/views/index?page=<%= i %>" class="page-link"><%= i %></a></li>
         <% } %>
         <% if (i == Number(current) + 4 && i < pages) { %>
           <li class="page-item disabled"><a href="#" class="page-link">...</a></li>
@@ -111,9 +114,10 @@
       <% if (current == pages) { %>
         <li class="page-item disabled"><a href="#" class="page-link">Last</a></li>
       <% } else { %>
-        <li class="page-item"><a href="/?page=<%= pages %>" class="page-link">Last</a></li>
+        <li class="page-item"><a href="/views/index?page=<%= pages %>" class="page-link">Last</a></li>
       <% } %>
 
     </ul>
   </nav>
 <% } %>
+

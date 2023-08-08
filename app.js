@@ -17,7 +17,7 @@ const mongoose = require('mongoose')
 const verifyJWT = require('./server/middleware/verifyJWT')
 const path = require('path')
 
-
+app.use(methodOverride('_method'));
 // app.use(logger)
 
 

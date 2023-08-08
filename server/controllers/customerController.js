@@ -5,14 +5,16 @@ const User = require('../models/User');
 const stuControl = require('../models/studentsControl');
 
 const mongoose = require('mongoose');
-
+const verifyRoles = require('../middleware/verifyRoles')
+const ROLES_LIST = require('../config/roles_list')
 //dashboard and print the student according to dep and SubDep
 exports.homepage = async (req, res) => {
   const messages = req.flash('info'); // Retrieve flash messages using req.flash()
   const local = {
     title: "my page",
+    userRoles: req.roles, // Pass user roles to the template
+    ROLES_LIST: ROLES_LIST, 
   };
-
   let perPage = 12;
   let page = req.query.page || 1;
 
@@ -34,7 +36,7 @@ exports.homepage = async (req, res) => {
       subDepartment: secondaryDepartment,
     });
 
-    res.render('index', { local, students, current: page, pages: Math.ceil(count / perPage), messages });
+    res.render('index', { local, students, current: page, pages: Math.ceil(count / perPage), messages});
   } catch (error) {
     console.log(error);
     res.status(500).send('Internal Server Error');
@@ -428,18 +430,18 @@ exports.editPost= async (req, res) => {
   }
 };
 
-//delet student from the icon and its working 
+// customerController.js
+
 exports.deleteStudent= async (req, res) => {
   try {
     await stuControl.deleteOne({_id: req.params.id});
-    res.redirect('/');
+    req.flash('info', 'Student deleted successfully.');
+    res.redirect('/views/index');
 
   } catch (error) {
     console.log(error);
   }
 };
-
-
 
 exports.allCoursesDashboard = async (req, res) => {
   const messages = req.flash('info'); // Retrieve flash messages using req.flash()
