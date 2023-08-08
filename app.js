@@ -56,8 +56,6 @@ app.use(flash());
 
 // Routes
 
-app.use('/', courseRoutes);
-app.use('/', stuContRouter);
 
 // ------------ some routes for login -------------
 app.get('/', (req, res) => {
@@ -80,9 +78,20 @@ app.use('/auth', require("./server/routes/login/auth"))
 
 //--routes need permissions
 app.use(verifyJWT)
-//dashboards
 app.use('/', require('./server/routes/customers'));
 
+app.use('/', courseRoutes);
+app.use('/', stuContRouter);
+
+
+
+//route for the studentResult controlller, in order to create its score
+app.use('/stuResult', require('./server/routes/stuResult'))
+//routes for creating email for each student
+app.use('/registers', require('./server/routes/login/registers'))
+
+
+//routes used to go to the users dashboard like control login, editor login,...
 app.use('/usersdash', require("./server/routes/login/usersDash"))
 
 //logout route
