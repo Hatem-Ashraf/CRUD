@@ -277,6 +277,16 @@ exports.update = async (req, res) => {
 
     let totalGpaPoints = 0;
     const total_points = courses.reduce((acc, course) => {
+      
+      course.c_hours = Number(course.c_hours)
+      course.year_works = Number(course.year_works)
+      course.reExam_year_works = Number(course.reExam_year_works)
+      course.oral_p = Number(course.oral_p)
+      course.reExam_oral_p = Number(course.reExam_oral_p)
+      course.written = Number(course.written)
+      course.reExam_written = Number(course.reExam_written)
+      course.course_total_degree = Number(course.course_total_degree)
+
       const total = course.year_works + course.oral_p + course.written;
       const perc = total / course.course_total_degree * 100;
       let GPA;
