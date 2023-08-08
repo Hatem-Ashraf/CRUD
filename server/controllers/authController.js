@@ -47,10 +47,10 @@ const studentLogin = async (req, res) => {
 
             //the res.cookie(cookieName, token, options), maxAge is the lifetime of that cookie which is here 1 day
             //if iam testing the API with thounder client then i should remove the flag secure: true, because the /refresh route uses cookie and this make an issue with thounder client , but when working with browsers like chrome the flag should be existed
-            res.cookie('jwt', accessToken, { httpOnly: true, sameSite: "None", maxAge:  60 * 60 * 1000 })//the flag 'secure: true' , this means that this cookie can be sent in https requests, and the sameSite: "None" is a flag that i added to fix the issue that caused when the user uses another domain. which is handled with credentials middleware i made
-                // secure: true, i deleted it temporarly because it issues with thounder client for making cookies
+            res.cookie('jwt', accessToken, { httpOnly: true, sameSite: "None", maxAge: 60 * 60 * 1000 })//the flag 'secure: true' , this means that this cookie can be sent in https requests, and the sameSite: "None" is a flag that i added to fix the issue that caused when the user uses another domain. which is handled with credentials middleware i made
+            // secure: true, i deleted it temporarly because it issues with thounder client for making cookies
             //this accesstoken is sent to the front end and he sould store it somewhere in memory not in local storage or as cookie
-            
+
             console.log(`access token : \n ${accessToken}`)
             res.redirect(`/onestudent/${foundUser._id}`)
 
@@ -69,7 +69,7 @@ const editorDashboard = async (req, res) => {
     const local = {
         title: "WELCOME EDITOR"
     }
-    res.redirect("http://localhost:3000/dash")
+    res.redirect("http://localhost:3000/dropDown")
 }
 
 // controller
@@ -113,13 +113,13 @@ const editorLogin = async (req, res) => {
 
             //the res.cookie(cookieName, token, options), maxAge is the lifetime of that cookie which is here 1 day
             //if iam testing the API with thounder client then i should remove the flag secure: true, because the /refresh route uses cookie and this make an issue with thounder client , but when working with browsers like chrome the flag should be existed
-            res.cookie('jwt', accessToken, { httpOnly: true, sameSite: "None", maxAge:  60 * 60 * 1000 })//the flag 'secure: true' , this means that this cookie can be sent in https requests, and the sameSite: "None" is a flag that i added to fix the issue that caused when the user uses another domain. which is handled with credentials middleware i made
-                // secure: true, i deleted it temporarly because it issues with thounder client for making cookies
+            res.cookie('jwt', accessToken, { httpOnly: true, sameSite: "None", maxAge: 60 * 60 * 1000 })//the flag 'secure: true' , this means that this cookie can be sent in https requests, and the sameSite: "None" is a flag that i added to fix the issue that caused when the user uses another domain. which is handled with credentials middleware i made
+            // secure: true, i deleted it temporarly because it issues with thounder client for making cookies
             //this accesstoken is sent to the front end and he sould store it somewhere in memory not in local storage or as cookie
-            
+
             console.log(`access token : \n ${accessToken}`)
             res.redirect(`/usersdash/editor`)
-    
+
         } else {
             return res.status(401).send("incorrect password or username") //unauthorized
         }
@@ -134,7 +134,7 @@ const controlDashboard = async (req, res) => {
     const local = {
         title: "WELCOME CONTROL"
     }
-    res.redirect("http://localhost:3000/dash")
+    res.redirect("http://localhost:3000/dropDown")
 }
 //controller
 const controlLogin = async (req, res) => {
@@ -177,13 +177,13 @@ const controlLogin = async (req, res) => {
 
             //the res.cookie(cookieName, token, options), maxAge is the lifetime of that cookie which is here 1 day
             //if iam testing the API with thounder client then i should remove the flag secure: true, because the /refresh route uses cookie and this make an issue with thounder client , but when working with browsers like chrome the flag should be existed
-            res.cookie('jwt', accessToken, { httpOnly: true, sameSite: "None", maxAge:  60 * 60 * 1000 })//the flag 'secure: true' , this means that this cookie can be sent in https requests, and the sameSite: "None" is a flag that i added to fix the issue that caused when the user uses another domain. which is handled with credentials middleware i made
-                // secure: true, i deleted it temporarly because it issues with thounder client for making cookies
+            res.cookie('jwt', accessToken, { httpOnly: true, sameSite: "None", maxAge: 60 * 60 * 1000 })//the flag 'secure: true' , this means that this cookie can be sent in https requests, and the sameSite: "None" is a flag that i added to fix the issue that caused when the user uses another domain. which is handled with credentials middleware i made
+            // secure: true, i deleted it temporarly because it issues with thounder client for making cookies
             //this accesstoken is sent to the front end and he sould store it somewhere in memory not in local storage or as cookie
-            
+
             console.log(`access token : \n ${accessToken}`)
-            res.redirect('/dropDown')
-    
+            res.redirect('/usersdash/control')
+
         } else {
             return res.status(401).send("incorrect password or username") //unauthorized
         }
@@ -193,11 +193,11 @@ const controlLogin = async (req, res) => {
 }
 
 //-------------------------- logout ---------
-const handleLogout =  async (req, res) => {
+const handleLogout = async (req, res) => {
     //frontend should delete the access token from the client memory
     const cookies = req.cookies
     //the optional chaining operator (?.) to check if the jwt property exists on the cookies object.
-    if (!cookies?.jwt){
+    if (!cookies?.jwt) {
         console.log("No jwt cookie found")
         return res.status(204) //No content, "no cookies found to delete"
     }
@@ -205,25 +205,25 @@ const handleLogout =  async (req, res) => {
 
     //Looking in the database for a user with this refresh token
     const foundUser = await User.findOne({ refreshToken }).exec()
-    if (!foundUser){
+    if (!foundUser) {
         //if there's no user has this refresh token so delete the cookie
-        res.clearCookie('jwt', {httpOnly: true, sameSite: "None"})
+        res.clearCookie('jwt', { httpOnly: true, sameSite: "None" })
         console.log("Cookie deleted successfully")
         return res.redirect("/")
-    } 
+    }
     //if there's user has this refresh token then delete the refresh token and the cookie
     foundUser.refreshToken = ''
     const result = await foundUser.save()
     console.log(result)
 
-    res.clearCookie('jwt', {httpOnly: true, sameSite: "None"})
+    res.clearCookie('jwt', { httpOnly: true, sameSite: "None" })
     console.log("Cookie deleted successfully")
     res.redirect("/")
 }
 //----------------------------------------------
 
 
-module.exports = { 
+module.exports = {
     studentLogin,
     editorLogin,
     editorDashboard,

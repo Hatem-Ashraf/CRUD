@@ -55,7 +55,6 @@ app.use(
 app.use(flash());
 
 // Routes
-app.use('/', require('./server/routes/customers'));
 
 app.use('/', courseRoutes);
 app.use('/', stuContRouter);
@@ -82,6 +81,8 @@ app.use('/auth', require("./server/routes/login/auth"))
 //--routes need permissions
 app.use(verifyJWT)
 //dashboards
+app.use('/', require('./server/routes/customers'));
+
 app.use('/usersdash', require("./server/routes/login/usersDash"))
 
 //logout route
