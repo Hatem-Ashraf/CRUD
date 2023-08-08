@@ -136,6 +136,9 @@ const controlDashboard = async (req, res) => {
     }
     res.redirect("http://localhost:3000/dropDown")
 }
+
+
+
 //controller
 const controlLogin = async (req, res) => {
     try {

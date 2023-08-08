@@ -18,5 +18,4 @@ router.route('/control')
 ////login as student
 router.route('/student')
     .post(authController.studentLogin)
-
 module.exports = router
