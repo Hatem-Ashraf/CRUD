@@ -420,18 +420,18 @@ exports.editPost= async (req, res) => {
   }
 };
 
-//delet student from the icon and its working 
+// customerController.js
+
 exports.deleteStudent= async (req, res) => {
   try {
     await stuControl.deleteOne({_id: req.params.id});
-    res.redirect('/');
+    req.flash('info', 'Student deleted successfully.');
+    res.redirect('/views/index');
 
   } catch (error) {
     console.log(error);
   }
 };
-
-
 
 exports.allCoursesDashboard = async (req, res) => {
   const messages = req.flash('info'); // Retrieve flash messages using req.flash()

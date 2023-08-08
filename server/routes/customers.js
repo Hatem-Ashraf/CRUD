@@ -27,12 +27,12 @@ router.get('/edit/:id', customerController.edit);
 router.put('/update/:id', customerController.update);
 
 router.put('/edit/:id', customerController.editPost);
-router.delete('/edit/:id', customerController.deleteStudent);
+//router.delete('/edit/:id', customerController.deleteStudent);
 router.all('/search', customerController.searchStudents);
 router.get('/viewCourse', customerController.allCoursesDashboard);
 //drop down menue
 router.get('/dropDown', customerController.dropDown);
 // Route for processing the form submission from the cascading dropdown menu page
 router.post('/dropDown', customerController.processDropDown);
-
+router.delete('/students/delete/:id', customerController.deleteStudent);
 module.exports = router;
